@@ -19,18 +19,18 @@
             "metadata": {
                 "description": "The base URI where artifacts required by this template are located."
             },
-            "defaultValue": "https://dpautoukssa.blob.core.windows.net/wvdscripts/"
+            "defaultValue": "https://raw.githubusercontent.com/djpierson/WVD/master/Automation/Scaling%20Scripts/"
         },
         "_artifactsLocationSasToken": {
             "type": "securestring",
             "metadata": {
                 "description": "The sasToken required to access _artifactsLocation when they're located in a storage account with private access."
             },
-            "defaultValue": "?sp=r&st=2020-06-25T12:17:38Z&se=2023-01-01T21:17:38Z&spr=https&sv=2019-10-10&sr=b&sig=loJCm%2F4qBBXCa1HJCpwXCBrMidsiyBka8aNXQK6dQ7c%3D"
+            "defaultValue": ""
         }
     },
     "variables": {
-        "scriptUri": "[concat(parameters('_artifactsLocation'),'automation_WVDScaling_ARM_AA.ps1', parameters('_artifactsLocationSasToken'))]",
+        "scriptUri": "[concat(parameters('_artifactsLocation'),'automation_WVDScaling_ARM_AA.ps1')]",
         "sku": "Free"
     },
     "resources": [
