@@ -1,0 +1,78 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "AutomationAccountName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the Automation Account"
+            }
+        },
+        "runbookName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the Runbook"
+            }
+        },
+        "_artifactsLocation": {
+            "type": "string",
+            "metadata": {
+                "description": "The base URI where artifacts required by this template are located."
+            },
+            "defaultValue": "https://dpautoukssa.blob.core.windows.net/wvdscripts/"
+        },
+        "_artifactsLocationSasToken": {
+            "type": "securestring",
+            "metadata": {
+                "description": "The sasToken required to access _artifactsLocation when they're located in a storage account with private access."
+            },
+            "defaultValue": "?sp=r&st=2020-06-25T12:17:38Z&se=2023-01-01T21:17:38Z&spr=https&sv=2019-10-10&sr=b&sig=loJCm%2F4qBBXCa1HJCpwXCBrMidsiyBka8aNXQK6dQ7c%3D"
+        }
+    },
+    "variables": {
+        "scriptUri": "[concat(parameters('_artifactsLocation'),'automation_WVDScaling_ARM_AA.ps1', parameters('_artifactsLocationSasToken'))]",
+        "sku": "Free"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Automation/automationAccounts",
+            "name": "[parameters('AutomationAccountName')]",
+            "apiVersion": "2015-10-31",
+            "location": "[resourceGroup().location]",
+            "tags": {},
+            "properties": {
+                "sku": {
+                    "name": "[variables('sku')]"
+                }
+            },
+            "resources": [
+                {
+                    "type": "runbooks",
+                    "name": "[Parameters('runbookName')]",
+                    "apiVersion": "2015-10-31",
+                    "location": "[resourceGroup().location]",
+                    "tags": {},
+                    "properties": {
+                        "runbookType": "PowerShell",
+                        "logProgress": "false",
+                        "logVerbose": "false",
+                        "publishContentLink": {
+                            "uri": "[variables('scriptUri')]",
+                            "version": "1.0.0.0"
+                        }
+                    },
+                    "dependsOn": [
+                        "[concat('Microsoft.Automation/automationAccounts/', parameters('AutomationAccountName'))]"
+                    ]
+                }
+            ]
+        }
+
+    ],
+    "outputs": {
+        "scripturivalidate": {
+            "type": "string",
+            "value": "[variables('scriptUri')]"
+        }
+    }
+}
