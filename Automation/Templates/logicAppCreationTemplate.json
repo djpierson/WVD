@@ -20,8 +20,6 @@
 				"description": "Specifies the recurrence interval of the job in minutes"
 			}
 		},
-		"azureBlobConnectionName": {},
-		"azureBlobConnectionDisplayName": {},
 		"azureBlobAccountName": {
 			"type": "string",
 			"defaultValue": "",
@@ -39,7 +37,10 @@
 			"type": "string"
 		}
 	},
-	"variables": {},
+	"variables": {
+		"azureBlobConnectionName": "azureblob",
+		"azureBlobConnectionDisplayName": "[concat('Get_', parameters('hostPoolName'), '_Scaling_Parameters')]",
+	},
 	"resources": [
 		{
 			"type": "Microsoft.Logic/workflows",
