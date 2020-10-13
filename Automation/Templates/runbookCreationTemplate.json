@@ -19,7 +19,7 @@
             "metadata": {
                 "description": "The base URI where artifacts required by this template are located."
             },
-            "defaultValue": "https://raw.githubusercontent.com/djpierson/WVD/master/Automation/Scaling/automation_WVDScaling_ARM_AA.ps1"
+            "defaultValue": "https://raw.githubusercontent.com/djpierson/WVD/master/Automation/Scaling/"
         },
         "_artifactsLocationSasToken": {
             "type": "securestring",
@@ -30,7 +30,7 @@
         }
     },
     "variables": {
-        "scriptUri": "https://raw.githubusercontent.com/djpierson/WVD/master/Automation/Scaling/automation_WVDScaling_ARM_AA.ps1",
+        "scriptUri": "concat(parameters('_artifactsLocation'),'automation_WVDScaling_ARM_AA.ps1",
         "sku": "Free"
     },
     "resources": [
