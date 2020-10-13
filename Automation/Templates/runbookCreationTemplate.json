@@ -30,7 +30,7 @@
         }
     },
     "variables": {
-        "scriptUri": "[concat(parameters('_artifactsLocation'),'automation_WVDScaling_ARM_AA.ps1')]",
+        "scriptUri": "https://raw.githubusercontent.com/djpierson/WVD/master/Automation/Scaling%20Scripts/automation_WVDScaling_ARM_AA.ps1",
         "sku": "Free"
     },
     "resources": [
