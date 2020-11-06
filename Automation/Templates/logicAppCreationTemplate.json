@@ -46,7 +46,7 @@
 			"type": "Microsoft.Logic/workflows",
 			"apiVersion": "2016-06-01",
 			"name": "[parameters('logicAppName')]",
-			"location": "[parameters('logicAppLocation')]",
+			"location": "[resourceGroup().location]",
 			"dependsOn": ["[resourceId('Microsoft.Web/connections', parameters('azureblobConnectionName'))]"],
 			"properties": {
 				"state": "Disabled",
