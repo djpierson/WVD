@@ -45,9 +45,25 @@
 	},
 	"variables": {
 		"azureBlobConnectionName": "azureblob",
-		"azureBlobConnectionDisplayName": "[concat('Get_', parameters('hostPoolName'), '_Scaling_Parameters')]",
+		"azureBlobConnectionDisplayName": "[concat('Get_Scaling_Parameters_', parameters('hostPoolName')]",
 	},
 	"resources": [
+		{
+			"type": "Microsoft.Web/connections",
+			"apiVersion": "2016-06-01",
+			"name": "[variables('azureBlobConnectionName')]",
+			"location": "[parameters('logicAppLocation')]",
+			"properties": {
+				"api": {
+					"id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', parameters('logicAppLocation'), '/managedApis/', 'azureblob')]"
+				},
+				"displayName": "[variables('azureBlobConnectionDisplayName')]",
+				"parameterValues": {
+					"accountName": "[parameters('azureBlobAccountName')]",
+					"accessKey": "[parameters('azureBlobAccessKey')]"
+				}
+			}
+		},
 		{
 			"type": "Microsoft.Logic/workflows",
 			"apiVersion": "2016-06-01",
@@ -116,22 +132,6 @@
 			},
 			"tags": {
 				"displayName": "LogicApp"
-			}
-		},
-		{
-			"type": "Microsoft.Web/connections",
-			"apiVersion": "2016-06-01",
-			"name": "[variables('azureBlobConnectionName')]",
-			"location": "[parameters('logicAppLocation')]",
-			"properties": {
-				"api": {
-					"id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', parameters('logicAppLocation'), '/managedApis/', 'azureblob')]"
-				},
-				"displayName": "[variables('azureBlobConnectionDisplayName')]",
-				"parameterValues": {
-					"accountName": "[parameters('azureBlobAccountName')]",
-					"accessKey": "[parameters('azureBlobAccessKey')]"
-				}
 			}
 		}
 	]
