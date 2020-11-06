@@ -100,7 +100,7 @@
 					"$connections": {
 						"value": {
 							"azureblob": {
-								"id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', parameters('logicAppLocation'), '/managedApis/', 'azureblob')]",
+								"id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', [resourceGroup().location], '/managedApis/', 'azureblob')]",
 								"connectionId": "[resourceId('Microsoft.Web/connections', parameters('azureblobConnectionName'))]",
 								"connectionName": "[parameters('azureblobConnectionName')]"
 							}
