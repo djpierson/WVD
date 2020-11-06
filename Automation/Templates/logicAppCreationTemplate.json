@@ -53,7 +53,7 @@
 			"apiVersion": "2016-06-01",
 			"name": "[parameters('logicAppName')]",
 			"location": "[parameters('logicAppLocation')]",
-			"dependsOn": ["[resourceId('Microsoft.Web/connections', parameters('azureblobConnectionName'))]"],
+			"dependsOn": ["[resourceId('Microsoft.Web/connections', variables('azureblobConnectionName'))]"],
 			"properties": {
 				"state": "Disabled",
 				"definition": {
@@ -107,8 +107,8 @@
 						"value": {
 							"azureblob": {
 								"id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', parameters('logicAppLocation'), '/managedApis/', 'azureblob')]",
-								"connectionId": "[resourceId('Microsoft.Web/connections', parameters('azureblobConnectionName'))]",
-								"connectionName": "[parameters('azureblobConnectionName')]"
+								"connectionId": "[resourceId('Microsoft.Web/connections', variables('azureblobConnectionName'))]",
+								"connectionName": "[variables('azureblobConnectionName')]"
 							}
 						}
 					}
@@ -121,13 +121,13 @@
 		{
 			"type": "Microsoft.Web/connections",
 			"apiVersion": "2016-06-01",
-			"name": "[parameters('azureBlobConnectionName')]",
+			"name": "[variables('azureBlobConnectionName')]",
 			"location": "[parameters('logicAppLocation')]",
 			"properties": {
 				"api": {
 					"id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', parameters('logicAppLocation'), '/managedApis/', 'azureblob')]"
 				},
-				"displayName": "[parameters('azureBlobConnectionDisplayName')]",
+				"displayName": "[variables('azureBlobConnectionDisplayName')]",
 				"parameterValues": {
 					"accountName": "[parameters('azureBlobAccountName')]",
 					"accessKey": "[parameters('azureBlobAccessKey')]"
