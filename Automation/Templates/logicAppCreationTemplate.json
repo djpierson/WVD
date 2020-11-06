@@ -45,7 +45,7 @@
 	},
 	"variables": {
 		"azureBlobConnectionName": "azureblob",
-		"azureBlobConnectionDisplayName": "[concat('Get_Scaling_Parameters_', parameters('hostPoolName')]",
+		"azureBlobConnectionDisplayName": "[concat('Get_Scaling_Parameters_', parameters('hostPoolName')]"
 	},
 	"resources": [
 		{
