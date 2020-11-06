@@ -75,7 +75,12 @@
 				"definition": {
 					"$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
 					"contentVersion": "1.0.0.0",
-					"parameters": {},
+					"parameters": {
+						"$connections": {
+							"defaultValue": {},
+							"type": "Object"
+						}
+					},
 					"triggers": {
 						"Recurrence": {
 							"recurrence": {
@@ -93,12 +98,12 @@
 									"connection": {
 										"name": "@parameters('$connections')['azureblob']['connectionId']"
 									}
-								}
-							},
-							"method": "get",
-							"path": "[concat('/wvd-automation/', parameters('hostPoolName'), '.json')]",
-							"queries": {
+								},	
+								"method": "get",
+								"path": "[concat('/wvd-automation/', parameters('hostPoolName'), '.json')]",
+								"queries": {
 								"inferContentType": true
+								}
 							},
 							"runAfter": {}
 						},
@@ -118,21 +123,21 @@
 					},
 					"outputs": {}
 				},
-				"parameters": {
-					"$connections": {
-						"value": {
-							"azureblob": {
-								"id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', parameters('logicAppLocation'), '/managedApis/', 'azureblob')]",
-								"connectionId": "[resourceId('Microsoft.Web/connections', variables('azureblobConnectionName'))]",
-								"connectionName": "[variables('azureblobConnectionName')]"
-							}
+			"parameters": {
+				"$connections": {
+					"value": {
+						"azureblob": {
+							"id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', parameters('logicAppLocation'), '/managedApis/', 'azureblob')]",
+							"connectionId": "[resourceId('Microsoft.Web/connections', variables('azureblobConnectionName'))]",
+							"connectionName": "[variables('azureblobConnectionName')]"
 						}
 					}
 				}
-			},
-			"tags": {
-				"displayName": "LogicApp"
 			}
+		},
+		"tags": {
+			"displayName": "LogicApp"
+		}
 		}
 	]
 }
