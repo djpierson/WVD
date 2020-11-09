@@ -46,7 +46,7 @@
 			}
 		},
 		"hostPoolName": {
-			"type": "string"
+			"type": "string",
 			"metadata": {
 				"description": "Name of the host pool"
 			}
