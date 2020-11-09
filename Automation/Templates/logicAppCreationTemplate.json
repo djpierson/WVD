@@ -109,7 +109,7 @@
 									}
 								},	
 								"method": "get",
-						"path": "[concat ('/datasets/default/files/@{encodeURIComponent(encodeURIComponent(''', parameters('azureblobFilePath', '')', '))}')]",
+								"path": "['/datasets/default/files/@{encodeURIComponent(encodeURIComponent(parameters('azureblobFilePath')))}']",
 								"queries": {
 								"inferContentType": true
 								}
