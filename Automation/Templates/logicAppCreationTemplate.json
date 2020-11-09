@@ -115,7 +115,7 @@
 								}
 							},
 							"metadata": {
-                    						"[parameters('azureblobFilePath')]": "[concat('/wvd-automation/', parameters('hostPoolName'))]"
+                    						"[parameters('azureblobFilePath')]": "[concat('/wvd-automation/', parameters('hostPoolName'), '.json')]"
                 					},
 							"runAfter": {}
 						},
