@@ -39,8 +39,17 @@
 				"description": "Specify a valid primary/secondary storage account access key."
 			}
 		},
+		"azureblobFilePath": {
+			"type": "string",
+			"metadata": {
+				"description": "Filepath to the Azure blob scaling params file"
+			}
+		},
 		"hostPoolName": {
 			"type": "string"
+			"metadata": {
+				"description": "Name of the host pool"
+			}
 		}
 	},
 	"variables": {
@@ -100,11 +109,14 @@
 									}
 								},	
 								"method": "get",
-								"path": "[concat('/wvd-automation/', parameters('hostPoolName'), '.json')]",
+								"path": "/datasets/default/files/@{encodeURIComponent(encodeURIComponent(parameters('azureblobFilePath'))}",
 								"queries": {
 								"inferContentType": true
 								}
 							},
+							"metadata": {
+                    						"[parameters('azureblobFilePath')]": "[concat('/wvd-automation/', parameters('hostPoolName'))]"
+                					},
 							"runAfter": {}
 						},
 						"HTTP": {
