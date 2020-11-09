@@ -45,6 +45,12 @@
 				"description": "Filepath to the Azure blob scaling params file"
 			}
 		},
+		"convertedPath": {
+			"type": "string",
+			"metadata": {
+				"description": "Converted Filepath to the Azure blob storage account"
+			}
+		},
 		"hostPoolName": {
 			"type": "string",
 			"metadata": {
@@ -109,13 +115,13 @@
 									}
 								},	
 								"method": "get",
-								"path": "[concat('/datasets/default/files/@{encodeURIComponent(encodeURIComponent(parameters('azureblobFilePath')))}')",
+								"path": "[parameters('azureblobFilePath')]",
 								"queries": {
 								"inferContentType": true
 								}
 							},
 							"metadata": {
-                    						"[parameters('azureblobFilePath')]": "[concat('/wvd-automation/', parameters('hostPoolName'), '.json')]"
+                    						"[parameters('convertedPath')]": "[concat('/wvd-automation/', parameters('hostPoolName'), '.json')]"
                 					},
 							"runAfter": {}
 						},
